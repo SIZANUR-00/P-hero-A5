@@ -1,69 +1,761 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Login - Issue Tracker</title>
+  <title>Issues Tracker</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    body { background: #f6f8fa; min-height: 100vh; }
-    .login-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 16px; background: white; }
-    .login-card { max-width: 400px; width: 100%; background: white; border: 1px solid #d0d7de; border-radius: 24px; padding: 32px 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); }
-    .logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .github-logo { height: 40px; width: auto; }
-    .brand-text { font-size: 28px; font-weight: 600; color: #0d1117; }
-    .login-title { font-size: 28px; font-weight: 600; margin: 8px 0 4px; display: flex; align-items: center; gap: 8px; }
-    .aperture-icon { height: 32px; width: auto; }
-    .login-sub { color: #57606a; font-size: 16px; margin-bottom: 32px; border-left: 4px solid #1f883d; padding-left: 16px; }
-    .input-group { margin-bottom: 24px; }
-    .input-group label { display: block; font-weight: 600; font-size: 14px; color: #24292f; margin-bottom: 6px; }
-    .input-group input { width: 100%; padding: 12px 16px; border: 1px solid #d0d7de; border-radius: 12px; font-size: 15px; background: #f6f8fa; }
-    .input-group input:focus { outline: none; border-color: #1f883d; background: white; }
-    .signin-btn { width: 100%; background: #1f883d; color: white; border: none; padding: 14px; font-size: 16px; font-weight: 600; border-radius: 40px; margin: 24px 0 16px; cursor: pointer; }
-    .or-divider { display: flex; align-items: center; gap: 12px; color: #8c959f; margin: 16px 0; }
-    .or-divider hr { flex: 1; border: none; border-top: 1px solid #d0d7de; }
-    @media (max-width: 400px) { .login-card { padding: 24px 16px; } .brand-text { font-size: 22px; } }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #f6f8fa;
+      min-height: 100vh;
+    }
+
+    
+    .login-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 16px;
+      background: white;
+    }
+
+    .login-card {
+      max-width: 400px;
+      width: 100%;
+      background: white;
+      border: 1px solid #d0d7de;
+      border-radius: 24px;
+      padding: 32px 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .github-logo {
+      height: 40px;
+      width: auto;
+    }
+
+    .brand-text {
+      font-size: 28px;
+      font-weight: 600;
+      color: #0d1117;
+    }
+
+    .login-title {
+      font-size: 28px;
+      font-weight: 600;
+      margin: 8px 0 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .aperture-icon {
+      height: 32px;
+      width: auto;
+    }
+
+    .login-sub {
+      color: #57606a;
+      font-size: 16px;
+      margin-bottom: 32px;
+      border-left: 4px solid #1f883d;
+      padding-left: 16px;
+    }
+
+    .input-group {
+      margin-bottom: 24px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      color: #24292f;
+      margin-bottom: 6px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d0d7de;
+      border-radius: 12px;
+      font-size: 15px;
+      background: #f6f8fa;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #1f883d;
+      background: white;
+    }
+
+    .input-hint {
+      font-size: 13px;
+      color: #6e7781;
+      margin-top: 4px;
+    }
+
+    .signin-btn {
+      width: 100%;
+      background: #1f883d;
+      color: white;
+      border: none;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 40px;
+      margin: 24px 0 16px;
+      cursor: pointer;
+    }
+
+    .or-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #8c959f;
+      margin: 16px 0;
+    }
+
+    .or-divider hr {
+      flex: 1;
+      border: none;
+      border-top: 1px solid #d0d7de;
+    }
+
+    .demo-box {
+      background: #f6f8fa;
+      border: 1px dashed #8c959f;
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    
+    .app {
+      display: none;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 2px solid #eaeef2;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-brand img {
+      height: 36px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 1px solid #d0d7de;
+      border-radius: 40px;
+      overflow: hidden;
+    }
+
+    .search-box input {
+      border: none;
+      padding: 10px 16px;
+      width: 260px;
+      font-size: 14px;
+    }
+
+    .search-box button {
+      background: transparent;
+      border: none;
+      padding: 0 16px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #57606a;
+    }
+
+    .new-issue {
+      background: #1f883d;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* ট্যাব */
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid #d0d7de;
+      margin: 24px 0 16px;
+    }
+
+    .tab {
+      padding: 8px 24px;
+      font-weight: 600;
+      background: none;
+      border: none;
+      font-size: 16px;
+      color: #57606a;
+      cursor: pointer;
+      border-radius: 40px 40px 0 0;
+    }
+
+    .tab.active {
+      color: #1f883d;
+      border-bottom: 4px solid #1f883d;
+      background: #ecf9f0;
+    }
+
+    /* মেটা সেকশন */
+    .meta-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 16px 0 32px;
+    }
+
+    .meta-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .meta-left img {
+      height: 28px;
+    }
+
+    .issue-badge {
+      background: #eaeef2;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-weight: 700;
+    }
+
+    .status-markers {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .marker {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .marker img {
+      height: 22px;
+      width: auto;
+    }
+
+    /* কার্ড গ্রিড - ৪ কলাম */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    /* ইস্যু কার্ড */
+    .issue-card {
+      background: white;
+      border: 1px solid #e2e6ec;
+      border-radius: 20px;
+      padding: 20px 16px 16px;
+      border-top: 6px solid transparent;
+      cursor: pointer;
+    }
+
+    .issue-card.open {
+      border-top-color: #2da44e;
+    }
+
+    .issue-card.closed {
+      border-top-color: #8250df;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #57606a;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      background: #f6f8fa;
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      margin: 12px 0;
+      color: #24292f;
+    }
+
+    .labels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .label {
+      background: #e7ecf2;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .assignee {
+      font-size: 13px;
+      color: #57606a;
+      margin: 6px 0;
+    }
+
+    .priority {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 11px;
+      font-weight: 700;
+      margin: 6px 0;
+    }
+
+    .priority.high {
+      background: #ffebe9;
+      color: #cf222e;
+    }
+
+    .priority.medium {
+      background: #fff1e5;
+      color: #bc4c00;
+    }
+
+    .priority.low {
+      background: #dafbe1;
+      color: #1a7f4b;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #6e7781;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #edf1f6;
+    }
+
+    /* স্পিনার */
+    .spinner {
+      display: none;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .spinner-circle {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #d0d7de;
+      border-top-color: #1f883d;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* মডাল */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-card {
+      background: white;
+      max-width: 500px;
+      width: 90%;
+      border-radius: 24px;
+      padding: 32px;
+      border-top: 8px solid #1f883d;
+    }
+
+    .close-modal {
+      background: #1f883d;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 40px;
+      font-weight: 600;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    /* ===== রেসপন্সিভ ডিজাইন ===== */
+    @media (max-width: 1200px) {
+      .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-right {
+        flex-direction: column;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .search-box input {
+        width: 100%;
+      }
+
+      .tab {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+
+      .meta-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .login-card {
+        padding: 24px 16px;
+      }
+
+      .brand-text {
+        font-size: 22px;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- লগইন পেজ -->
   <div class="login-page" id="loginPage">
     <div class="login-card">
       <div class="logo-row">
         <img src="assets/github-logo.png" alt="GitHub" class="github-logo" onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'">
         <span class="brand-text">Issues Tracker</span>
       </div>
+      
       <div class="login-title">
         <img src="assets/Aperture.png" alt="" class="aperture-icon" onerror="this.style.display='none'">
         Sign in
       </div>
       <div class="login-sub">to manage your issues</div>
+
       <div class="input-group">
         <label>Username</label>
-        <input type="text" id="username" value="">
+        <input type="text" id="username" value="admin">
+        <div class="input-hint">Default: admin</div>
       </div>
+
       <div class="input-group">
         <label>Password</label>
-        <input type="password" id="password" value="">
+        <input type="password" id="password" value="admin123">
+        <div class="input-hint">Default: admin123</div>
       </div>
+
       <button class="signin-btn" id="signinBtn">Sign In</button>
+
       <div class="or-divider">
         <hr> OR <hr>
       </div>
+
       <div class="demo-box">
         <strong>Demo Credentials:</strong><br>
         Username: admin • Password: admin123
       </div>
     </div>
   </div>
+
+  <!-- মেইন অ্যাপ -->
+  <div class="app" id="app">
+    <!-- ন্যাভবার -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <img src="assets/github-logo.png" alt="GitHub" onerror="this.style.display='none'">
+        <span style="font-size: 24px; font-weight: 600;">Issues Tracker</span>
+      </div>
+      <div class="nav-right">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search issues...">
+          <button id="searchBtn">🔍</button>
+        </div>
+        <button class="new-issue">
+          <span>+</span> New Issue
+        </button>
+      </div>
+    </nav>
+
+    <!-- ট্যাব -->
+    <div class="tab-bar">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="open">Open</button>
+      <button class="tab" data-filter="closed">Closed</button>
+    </div>
+
+    <!-- মেটা সেকশন -->
+    <div class="meta-section">
+      <div class="meta-left">
+        <img src="assets/Aperture.png" alt="" onerror="this.style.display='none'">
+        <span class="issue-badge" id="issueCount">0 Issues</span>
+        <span>Track and manage your project issues</span>
+      </div>
+      <div class="status-markers">
+        <span class="marker">
+          <img src="assets/Open-Status.png" alt="Open" onerror="this.style.display='none'">
+          Open
+        </span>
+        <span class="marker">
+          <img src="assets/Closed- Status .png" alt="Closed" onerror="this.style.display='none'">
+          Closed
+        </span>
+      </div>
+    </div>
+
+    <!-- স্পিনার -->
+    <div class="spinner" id="spinner">
+      <div class="spinner-circle"></div>
+    </div>
+
+    <!-- কার্ড গ্রিড -->
+    <div class="card-grid" id="cardGrid"></div>
+  </div>
+
+  <!-- মডাল -->
+  <div class="modal" id="modal">
+    <div class="modal-card" id="modalContent"></div>
+  </div>
+
   <script>
+    let allIssues = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    const loginPage = document.getElementById('loginPage');
+    const app = document.getElementById('app');
+    const spinner = document.getElementById('spinner');
+    const cardGrid = document.getElementById('cardGrid');
+    const issueCount = document.getElementById('issueCount');
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalContent');
+
     document.getElementById('signinBtn').addEventListener('click', (e) => {
       e.preventDefault();
       const user = document.getElementById('username').value;
       const pass = document.getElementById('password').value;
+      
       if (user === 'admin' && pass === 'admin123') {
-        alert('Login successful!');
+        loginPage.style.display = 'none';
+        app.style.display = 'block';
+        fetchIssues();
       } else {
         alert('Invalid username or password');
+      }
+    });
+
+    async function fetchIssues() {
+      spinner.style.display = 'flex';
+      try {
+        const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+        const data = await res.json();
+        if (data.status === 'success') {
+          allIssues = data.data;
+          filterAndRender();
+        }
+      } catch (error) {
+        alert('Error loading issues');
+      } finally {
+        spinner.style.display = 'none';
+      }
+    }
+
+    function filterAndRender() {
+      let filtered = [...allIssues];
+      if (currentFilter === 'open') {
+        filtered = filtered.filter(i => i.status === 'open');
+      } else if (currentFilter === 'closed') {
+        filtered = filtered.filter(i => i.status === 'closed');
+      }
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(i => 
+          i.title?.toLowerCase().includes(q) ||
+          i.description?.toLowerCase().includes(q) ||
+          i.author?.toLowerCase().includes(q)
+        );
+      }
+      renderCards(filtered);
+      issueCount.textContent = `${filtered.length} Issue${filtered.length !== 1 ? 's' : ''}`;
+    }
+
+    function renderCards(issues) {
+      if (!issues.length) {
+        cardGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:40px;">No issues found</div>';
+        return;
+      }
+      let html = '';
+      issues.forEach(issue => {
+        const statusClass = issue.status === 'open' ? 'open' : 'closed';
+        const priorityClass = `priority ${issue.priority || 'medium'}`;
+        const labels = Array.isArray(issue.labels) ? issue.labels : [];
+        const date = issue.createdAt ? new Date(issue.createdAt).toLocaleDateString('en-US') : '';
+        html += `
+          <div class="issue-card ${statusClass}" data-id="${issue.id}">
+            <div class="card-title">${issue.title || 'No title'}</div>
+            <div class="card-meta">
+              <span>👤 ${issue.author || 'Unknown'}</span>
+              <span>• ${date}</span>
+            </div>
+            <div class="card-desc">${issue.description || 'No description'}</div>
+            <div class="labels">
+              ${labels.map(l => `<span class="label">${l}</span>`).join('')}
+            </div>
+            <div class="assignee">📌 Assigned: ${issue.assignee || 'None'}</div>
+            <div>
+              <span class="${priorityClass}">${(issue.priority || 'medium').toUpperCase()}</span>
+            </div>
+            <div class="card-footer">
+              <span>💬 0</span>
+              <span>📅 ${date}</span>
+            </div>
+          </div>
+        `;
+      });
+      cardGrid.innerHTML = html;
+      document.querySelectorAll('.issue-card').forEach(card => {
+        card.addEventListener('click', () => showIssueDetails(card.dataset.id));
+      });
+    }
+
+    async function showIssueDetails(id) {
+      try {
+        const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+        const data = await res.json();
+        if (data.status === 'success') {
+          const i = data.data;
+          modalContent.innerHTML = `
+            <h2 style="margin-bottom: 20px;">${i.title}</h2>
+            <div style="margin-bottom: 16px;">
+              <p><strong>Description:</strong> ${i.description || '—'}</p>
+              <p><strong>Status:</strong> ${i.status}</p>
+              <p><strong>Priority:</strong> ${i.priority}</p>
+              <p><strong>Author:</strong> ${i.author}</p>
+              <p><strong>Assignee:</strong> ${i.assignee || 'None'}</p>
+              <p><strong>Labels:</strong> ${Array.isArray(i.labels) ? i.labels.join(', ') : 'None'}</p>
+              <p><strong>Created:</strong> ${new Date(i.createdAt).toLocaleString('en-US')}</p>
+            </div>
+            <button class="close-modal" onclick="document.getElementById('modal').style.display='none'">Close</button>
+          `;
+          modal.style.display = 'flex';
+        }
+      } catch (error) {
+        alert('Error loading details');
+      }
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+        currentFilter = e.target.dataset.filter;
+        filterAndRender();
+      });
+    });
+
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      searchQuery = document.getElementById('searchInput').value;
+      filterAndRender();
+    });
+
+    document.getElementById('searchInput').addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        searchQuery = e.target.value;
+        filterAndRender();
+      }
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
       }
     });
   </script>
